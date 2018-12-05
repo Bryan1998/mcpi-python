@@ -23,7 +23,9 @@ def get_season(now):
 
 def init():
 	# you can change this to a remote ip
-	mc = Minecraft.create('127.0.0.1', 4711)
+	host = '127.0.0.1'
+	port = 4711
+	mc = Minecraft.create(host, port)
 	x, y, z = mc.player.getPos()  
 	return mc
 
@@ -44,10 +46,18 @@ def main():
 	mc = init()
 	x, y, z = mc.player.getPos()
 	
-	if get_season(date.today()) == 'winter':
+	season = get_season(date.today())
+	
+	if season == 'winter':
 		mc.postToChat("It's winter!  Here's a snowman for you...")
-	else:
+	elif season == 'summer':
 		mc.postToChat("It's summer!  No snowman for you!  Ok, fine here's your snowman...")
+	elif season == 'spring':
+		mc.postToChat("It's spring!  Your snowman is MELTING!  Enjoy it while it lasts...")
+	elif season == 'autumn':
+		mc.postToChat("It's autumn!  It's just not cold enough to build a snowman!  I had to import this snow from THE NORTH POLE!  Merry early Christmas!")  
+	else:
+		mc.postToChat("Holy crap!  Something isn't right!  Check the code ASAP!")
 		
 	snowman(mc, x, y, z)
   
